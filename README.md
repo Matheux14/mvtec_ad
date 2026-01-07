@@ -259,8 +259,3 @@ Le projet met volontairement en avant l’idée :
 
 - GitHub : `Matheux14`
 - Projet : pipeline détection d’anomalies industrielles (MVTec AD)
-
-Si tu veux, je peux aussi te générer :
-- un **diagramme SVG/PNG** propre pour le README,
-- un **requirements.txt** “propre”,
-- une section **Reproductibilité** (commands exactes des notebooks).
