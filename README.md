@@ -21,13 +21,13 @@ Ce dépôt met donc l’accent sur :
 
 ---
 
-## Idée clé (en 1 phrase)
+## Idée clé
 
 > On apprend à reconnaître “le comportement normal” (features des *good*), puis on mesure à quel point une nouvelle image s’en éloigne (Mahalanobis), et on combine ça avec un classifieur + un détecteur YOLO selon une politique.
 
 ---
 
-## Architecture (vue simple)
+## Architecture
 
 ```
 Image
@@ -52,7 +52,7 @@ Image
 ```
 mvtec_ad/
 ├─ app.py                       # démo (Streamlit) / pipeline bottle (selon ta version)
-├─ app_image_level.py           # app / API image-level multi-catégories (selon ta version)
+├─ app_image_level.py           # app / API image-level multi-catégories
 ├─ prepare_mvtec_yolo_all.py    # préparation des données YOLO multi-catégories
 ├─ mvtec_yolo_all.yaml          # YAML Ultralytics (classes, chemins, splits)
 ├─ experiments/                 # CSV, JSON, seuils, résultats, caches
@@ -97,7 +97,7 @@ Sinon, version rapide :
 pip install torch torchvision numpy pandas scikit-learn matplotlib opencv-python pillow ultralytics streamlit
 ```
 
-> Astuce : générer ton `requirements.txt` :
+> Astuce : générer `requirements.txt` :
 ```bash
 pip freeze > requirements.txt
 ```
@@ -119,7 +119,7 @@ Tu peux garder la structure originale MVTec et pointer le chemin racine dans tes
 <img width="1523" height="717" alt="archi (1)" src="https://github.com/user-attachments/assets/12f2c39f-48e1-4090-9363-6b6f722a8114" />
 
 
-Les notebooks sont organisés de façon progressive (les noms peuvent varier selon ta version, mais la logique reste la même) :
+Les notebooks sont organisés de façon progressive (les noms peuvent varier selon la version, mais la logique reste la même) :
 
 1. **00_check_mvtec_structure.ipynb**  
    Vérifie la structure du dataset, les catégories, les masques.
@@ -157,15 +157,15 @@ Pour une catégorie donnée :
 1. On extrait des features `φ(x) ∈ R^512` pour les images **good** du train.
 2. On estime la moyenne `μ` et la covariance `Σ` du “nuage normal”.
 3. Pour une image test, on calcule un score :
-   \[
+   $
    s(x) = \sqrt{(\phi(x)-\mu)^T \Sigma^{-1} (\phi(x)-\mu)}
-   \]
+   $
 4. Plus `s(x)` est grand, plus l’image est **suspecte**.
 5. On choisit un seuil `τ_ad(cat)` via F1/F2/SAFE.
 
 ---
 
-## Policies (décision finale)
+## Policies 
 
 Le dépôt utilise des **policies** (règles) qui combinent :
 - `p_cls(x)` (probabilité defect du classifieur)
@@ -221,7 +221,7 @@ streamlit run app_image_level.py
 
 ---
 
-## Résultats (interprétation)
+## Résultats
 
 Les métriques importantes :
 - **Recall** (rappel) : “combien de défauts je capture”
